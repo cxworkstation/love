@@ -1,0 +1,5 @@
+/classes/*
+.classpth
+.gitignore
+.project
+./setting/*
