@@ -1,4 +1,5 @@
 classes/*
-?.classpth
+?.classpath
 ?.project
 ?.setting/*
+?.mymetadata
