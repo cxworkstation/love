@@ -1,5 +1,5 @@
-classes/*
-?.classpath
-?.project
-?.setting/*
-?.mymetadata
+*/classes/*
+.classpath
+.project
+.setting/*
+.mymetadata
