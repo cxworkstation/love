@@ -26,4 +26,7 @@ public interface BaseColumnService {
 	// 条件查询商品
 	public List<List<Object>> search(String colName, String key);
 
+	// 修改商品
+	public int update(Goods goods);
+
 }

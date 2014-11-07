@@ -50,4 +50,9 @@ public class GoodsServiceImpl implements GoodsService {
 		return list;
 	}
 
+	public int updateGoods(Goods goods) {
+		int result = goodsDao.updateGoods(goods);
+		return result;
+	}
+
 }

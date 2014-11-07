@@ -64,7 +64,8 @@ public class CurrentServlet extends HttpServlet {
 						response);
 			}
 		} else if ("update".equals(str)) {
-			boolean flag = update();
+			Goods goods = WebUtil.request2Bean(request, Goods.class);
+			boolean flag = update(goods);
 			if (flag) {
 				request.getRequestDispatcher(
 						"/WEB-INF/backstage/common/success.jsp").forward(
@@ -122,8 +123,13 @@ public class CurrentServlet extends HttpServlet {
 	BaseColumnService service = new BaseColumnServiceImpl();
 
 	// 修改
-	private boolean update() {
-		return true;
+	private boolean update(Goods goods) {
+		int result = service.update(goods);
+		boolean flag = false;
+		if (result == 1) {
+			flag = true;
+		}
+		return flag;
 	}
 
 	// 条件查询
@@ -141,7 +147,6 @@ public class CurrentServlet extends HttpServlet {
 	// 查看所有
 	private List<List<Object>> getAllCurrent() {
 		List<List<Object>> goods = service.findAllCurrent("c1");// c1默认就是当季推荐(类里面可以改名字)
-		System.out.println(goods);
 		return goods;
 	}
 

@@ -63,7 +63,9 @@ public class NewGoodsServlet extends HttpServlet {
 						response);
 			}
 		} else if ("update".equals(str)) {
-			boolean flag = update();
+			Goods goods = WebUtil.request2Bean(request, Goods.class);
+			boolean flag = update(goods);
+			System.out.println("MDNSSF" + flag);
 			if (flag) {
 				request.getRequestDispatcher(
 						"/WEB-INF/backstage/common/success.jsp").forward(
@@ -120,8 +122,13 @@ public class NewGoodsServlet extends HttpServlet {
 	BaseColumnService service = new BaseColumnServiceImpl();
 
 	// 修改
-	private boolean update() {
-		return true;
+	private boolean update(Goods goods) {
+		boolean flag = false;
+		int result = service.update(goods);
+		if (result == 1) {
+			flag = true;
+		}
+		return flag;
 	}
 
 	// 条件查询

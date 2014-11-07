@@ -72,7 +72,8 @@ public class GoodsServlet extends HttpServlet {
 						response);
 			}
 		} else if ("update".equals(str)) {
-			boolean flag = update();
+			Goods goods = WebUtil.request2Bean(request, Goods.class);
+			boolean flag = update(goods);
 			if (flag) {
 				request.getRequestDispatcher(
 						"/WEB-INF/backstage/common/success.jsp").forward(
@@ -134,8 +135,13 @@ public class GoodsServlet extends HttpServlet {
 	}
 
 	// 修改
-	private boolean update() {
-		return true;
+	private boolean update(Goods goods) {
+		boolean flag = false;
+		int result = service.updateGoods(goods);
+		if (result == 1) {
+			flag = true;
+		}
+		return flag;
 	}
 
 	// 批量删除

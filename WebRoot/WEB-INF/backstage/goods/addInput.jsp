@@ -58,7 +58,7 @@ table .floatLeft{float:left; }
  <form action="<%=basePath%>backstage/goods/add" method="post" id="myform" name="myform">
          <table>
          <tr>
-  		<td colspan="2"><input type="hidden"  name="img" id="img" size="40" /></td>
+  		<td colspan="2"><input type="hidden"  name="img" id="img" size="40" value=""/></td>
    	   </tr>
   	   <tr>
   		<td> 商品名称：</td>
@@ -87,7 +87,7 @@ table .floatLeft{float:left; }
    	  <tr>
    	    <td>类型id:</td>
   		<td>
-  		      <input type="text" name="type_id" size="40">
+  		      <input type="text" name="type_name" size="40">
   		</td>
    	  </tr>
    	  <tr>

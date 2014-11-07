@@ -7,6 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+
   <head>
     <base href="<%=basePath%>">
     
@@ -18,6 +19,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
      <script type="text/javascript" src="<%=basePath%>js/backstage/goods/index.js"></script>
     <script type="text/javascript" src="<%=basePath%>js/backstage/common/common.js"></script>
+    <script type="text/javascript">
+		function uploadImg(){  
+		        document.getElementById("myformphoto").submit();
+		}
+    </script>
 <style type="text/css">
 table { margin-top:10px;background-color:#eef4ea; 
 }
@@ -38,14 +44,14 @@ table .floatLeft{float:left; }
           <table>
            <tr>
              <td colspan="2">
-               <img alt="图片展现区域" id="picture" name="picture" src="" height="300px" width="300px">
+               <img alt="图片展现区域" id="picture" name="picture" src="<%=basePath%>${list[1]}" height="300px" width="300px">
              </td>
            
            </tr>
            <tr>
   	         <td> 上传图片:</td>
   		     <td> 
-		       <input type="file"  name="image"  size="30" class="selectinput" onblur="uploadImg();" > 
+		       <input type="file"  name="image"  size="30" class="selectinput" onchange="uploadImg();" > 
              </td>
   	      </tr>
          </table>
@@ -56,39 +62,39 @@ table .floatLeft{float:left; }
  <form action="<%=basePath%>backstage/goods/update" method="post" id="myform" name="myform">
          <table>
          <tr>
-  		<td colspan="2"><input type="hidden"  name="img" id="img" size="40"  value="${list}"/></td>
+  		<td colspan="2"><input type="hidden"  name="img" id="img" size="40"  value="${list[1]}"/></td>
    	   </tr>
    	   <tr>
-  		<td colspan="2"><input type="hidden"  name="aid" id="aid" size="40"  /></td>
+  		<td colspan="2"><input type="hidden"  name="id" id="aid" size="40" value="${list[0]}" /></td>
    	   </tr>
   	   <tr>
   		<td> 商品名称：</td>
-  		<td><input type="text"  name="name"  size="40"  value="${list[1]"/></td>
+  		<td><input type="text"  name="name"  size="40"  value="${list[2]}"/></td>
    	   </tr>
    	   <tr>
   		<td> 商品原价： </td>
-  		<td><input type="text"  name="oldprice"  size="40" /></td>
+  		<td><input type="text"  name="oldprice"  size="40" value="${list[3]}" /></td>
    	   </tr>
    	   <tr>
   		<td> 商品现价： </td>
-  		<td><input type="text"  name="newprice"  size="40" /></td>
+  		<td><input type="text"  name="newprice"  size="40" value="${list[4]}"/></td>
    	   </tr>
    	   <tr>
    	    <td>起订数量：</td>
    	    <td>
-   	      <input type="text" name="start_number" size="40" >
+   	      <input type="text" name="start_number" size="40" value="${list[5]}" >
    	    </td>
    	   </tr>
   	   <tr>
   		<td>价格单位:</td>
   		<td>
-  		   <input type="text" name="unit" size="40" >
+  		   <input type="text" name="unit" size="40" value="${list[6]}">
   		</td>
    	  </tr>
    	  <tr>
    	    <td>类型名称:</td>
   		<td>
-  		      <input type="text" name="type_id" size="40" >
+  		      <input type="text" name="type_name" size="40" value="${list[7]}">
   		</td>
    	  </tr>
    	  <tr>

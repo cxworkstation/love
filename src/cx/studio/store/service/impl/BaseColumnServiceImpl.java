@@ -45,4 +45,9 @@ public class BaseColumnServiceImpl implements BaseColumnService {
 		return list;
 	}
 
+	public int update(Goods goods) {
+		int result = currentDao.updateColumn(goods);
+		return result;
+	}
+
 }

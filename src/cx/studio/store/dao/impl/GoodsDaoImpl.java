@@ -3,8 +3,6 @@ package cx.studio.store.dao.impl;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Test;
-
 import cx.studio.store.dao.BaseDao;
 import cx.studio.store.dao.GoodsDao;
 import cx.studio.store.model.Goods;
@@ -41,7 +39,6 @@ public class GoodsDaoImpl implements GoodsDao {
 		System.out.println(goods);
 	}
 
-	@Test
 	public void demo6() {
 		// 根据id查找商品详情
 		int id = 32;
@@ -134,10 +131,21 @@ public class GoodsDaoImpl implements GoodsDao {
 		goods.setStart_number(1);
 		goods.setType_name("class2");
 		goods.setUnit("g");
-		goods.setImg("images/2.jpg");
+		goods.setImg("images/4c04MkE.jpg");
 		goods.setPuttime(new Date());
-		goods.setId(4);
-		updateGoods(goods);
+		goods.setId(86);
+		System.out.println(updateGoods(goods));
+
+	}
+
+	// 修改商品详细信息(除了关键字和备注)
+	public int updateGoods(Goods goods) {
+		String sql = "update goods set name=?,oldprice=?,newprice=?,start_number=?,unit=?,img=?,puttime=?,type_name=? where id=?";
+		Object[] param = { goods.getName(), goods.getOldprice(),
+				goods.getNewprice(), goods.getStart_number(), goods.getUnit(),
+				goods.getImg(), new Date(), goods.getType_name(), goods.getId() };
+		int result = baseDao.BaseUpdate(sql, param);
+		return result;
 	}
 
 	// 添加关键字/修改关键字
@@ -163,19 +171,8 @@ public class GoodsDaoImpl implements GoodsDao {
 				goods.getNewprice(), goods.getStart_number(), 0,
 				goods.getUnit(),
 				CodeUtil.getKeyWord(goods.getName(), goods.getType_name()),
-				goods.getImg(), CodeUtil.getProductId(), goods.getPuttime(),
+				goods.getImg(), CodeUtil.getProductId(), new Date(),
 				goods.getType_name() };
-		int result = baseDao.BaseUpdate(sql, param);
-		return result;
-	}
-
-	// 修改商品详细信息(除了关键字和备注)
-	public int updateGoods(Goods goods) {
-		String sql = "update goods set name=?,oldprice=?,newprice=?,start_number=?,unit=?,img=?,product_id=?,puttime=?,type_name=? where id=?";
-		Object[] param = { goods.getName(), goods.getOldprice(),
-				goods.getNewprice(), goods.getStart_number(), goods.getUnit(),
-				goods.getImg(), goods.getProduct_id(), goods.getPuttime(),
-				goods.getType_name(), goods.getId() };
 		int result = baseDao.BaseUpdate(sql, param);
 		return result;
 	}

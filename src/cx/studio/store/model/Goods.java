@@ -16,6 +16,24 @@ public class Goods {
 	private String remark;
 	private Date puttime;
 	private String type_name;
+	private int dealTime;
+	private int commentNum;
+
+	public int getDealTime() {
+		return dealTime;
+	}
+
+	public void setDealTime(int dealTime) {
+		this.dealTime = dealTime;
+	}
+
+	public int getCommentNum() {
+		return commentNum;
+	}
+
+	public void setCommentNum(int commentNum) {
+		this.commentNum = commentNum;
+	}
 
 	public String getType_name() {
 		return type_name;

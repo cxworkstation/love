@@ -28,4 +28,7 @@ public interface GoodsService {
 
 	// 条件查询
 	public List<List<Object>> search(String colName, String key);
+
+	// 修改商品
+	public int updateGoods(Goods goods);
 }

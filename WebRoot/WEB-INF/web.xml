@@ -1,10 +1,294 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" 
-	xmlns="http://java.sun.com/xml/ns/javaee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>store</display-name>
   <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- 测试Servlet -->
+  <servlet>
+    <servlet-name>TestServlet</servlet-name>
+    <servlet-class>cx.studio.store.test.TestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TestServlet</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 后台首页 -->
+  <servlet>
+    <servlet-name>BIndexServlet</servlet-name>
+    <servlet-class>cx.studio.store.backstage.servlet.IndexServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BIndexServlet</servlet-name>
+    <url-pattern>/backstage/index/top</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BIndexServlet</servlet-name>
+    <url-pattern>/backstage/index/menu</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BIndexServlet</servlet-name>
+    <url-pattern>/backstage/index/main</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 后台商品总览管理 -->
+  <servlet>
+    <servlet-name>GoodsServlet</servlet-name>
+    <servlet-class>cx.studio.store.backstage.servlet.GoodsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoodsServlet</servlet-name>
+    <url-pattern>/backstage/goods/index</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>GoodsServlet</servlet-name>
+    <url-pattern>/backstage/goods/addInput</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>GoodsServlet</servlet-name>
+    <url-pattern>/backstage/goods/updateInput</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>GoodsServlet</servlet-name>
+    <url-pattern>/backstage/goods/update</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GoodsServlet</servlet-name>
+    <url-pattern>/backstage/goods/delete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GoodsServlet</servlet-name>
+    <url-pattern>/backstage/goods/remarkInput</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GoodsServlet</servlet-name>
+    <url-pattern>/backstage/goods/updateremark</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>GoodsServlet</servlet-name>
+    <url-pattern>/backstage/goods/add</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>GoodsServlet</servlet-name>
+  <url-pattern>/backstage/goods/delBatch</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+  <servlet-name>GoodsServlet</servlet-name>
+  <url-pattern>/backstage/goods/search</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>GoodsServlet</servlet-name>
+  <url-pattern>/backstage/goods/update</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 当季推荐-->
+ <servlet>
+ <servlet-name>CurrentServlet</servlet-name>
+ <servlet-class>cx.studio.store.backstage.servlet.CurrentServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+    <servlet-name>CurrentServlet</servlet-name>
+    <url-pattern>/backstage/current/index</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>CurrentServlet</servlet-name>
+    <url-pattern>/backstage/current/addInput</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>CurrentServlet</servlet-name>
+    <url-pattern>/backstage/current/updateInput</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>CurrentServlet</servlet-name>
+    <url-pattern>/backstage/current/update</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CurrentServlet</servlet-name>
+    <url-pattern>/backstage/current/delete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CurrentServlet</servlet-name>
+    <url-pattern>/backstage/current/remarkInput</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CurrentServlet</servlet-name>
+    <url-pattern>/backstage/current/updateremark</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>CurrentServlet</servlet-name>
+    <url-pattern>/backstage/current/add</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+  <servlet-name>CurrentServlet</servlet-name>
+  <url-pattern>/backstage/current/delBatch</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>CurrentServlet</servlet-name>
+  <url-pattern>/backstage/current/search</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>CurrentServlet</servlet-name>
+  <url-pattern>/backstage/current/update</url-pattern>
+  </servlet-mapping>
+  
+ <!-- 新品上市 -->
+  <servlet>
+    <servlet-name>NewGoodsServlet</servlet-name>
+    <servlet-class>cx.studio.store.backstage.servlet.NewGoodsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewGoodsServlet</servlet-name>
+    <url-pattern>/backstage/newgoods/index</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>NewGoodsServlet</servlet-name>
+    <url-pattern>/backstage/newgoods/addInput</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>NewGoodsServlet</servlet-name>
+    <url-pattern>/backstage/newgoods/updateInput</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>NewGoodsServlet</servlet-name>
+    <url-pattern>/backstage/newgoods/update</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NewGoodsServlet</servlet-name>
+    <url-pattern>/backstage/newgoods/delete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NewGoodsServlet</servlet-name>
+    <url-pattern>/backstage/newgoods/remarkInput</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NewGoodsServlet</servlet-name>
+    <url-pattern>/backstage/newgoods/updateremark</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>NewGoodsServlet</servlet-name>
+    <url-pattern>/backstage/newgoods/add</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+  <servlet-name>NewGoodsServlet</servlet-name>
+  <url-pattern>/backstage/newgoods/delBatch</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>NewGoodsServlet</servlet-name>
+  <url-pattern>/backstage/newgoods/search</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>NewGoodsServlet</servlet-name>
+  <url-pattern>/backstage/newgoods/update</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 今日免费 -->
+   <servlet>
+    <servlet-name>TodayFreeServlet</servlet-name>
+    <servlet-class>cx.studio.store.backstage.servlet.TodayFreeServlet</servlet-class>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>TodayFreeServlet</servlet-name>
+    <url-pattern>/backstage/todayfree/index</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>TodayFreeServlet</servlet-name>
+    <url-pattern>/backstage/todayfree/addInput</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>TodayFreeServlet</servlet-name>
+    <url-pattern>/backstage/todayfree/updateInput</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>TodayFreeServlet</servlet-name>
+    <url-pattern>/backstage/todayfree/update</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TodayFreeServlet</servlet-name>
+    <url-pattern>/backstage/todayfree/delete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TodayFreeServlet</servlet-name>
+    <url-pattern>/backstage/todayfree/remarkInput</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TodayFreeServlet</servlet-name>
+    <url-pattern>/backstage/todayfree/updateremark</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>TodayFreeServlet</servlet-name>
+    <url-pattern>/backstage/todayfree/add</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+  <servlet-name>TodayFreeServlet</servlet-name>
+  <url-pattern>/backstage/todayfree/delBatch</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>TodayFreeServlet</servlet-name>
+  <url-pattern>/backstage/todayfree/search</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+  <servlet-name>TodayFreeServlet</servlet-name>
+  <url-pattern>/backstage/todayfree/update</url-pattern>
+  </servlet-mapping>
+  
+  <!--热门商品-->
+   <servlet>
+    <servlet-name>HotGoodServlet</servlet-name>
+    <servlet-class>cx.studio.store.backstage.servlet.HotGoodServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HotGoodServlet</servlet-name>
+    <url-pattern>/backstage/hotgood/index</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HotGoodServlet</servlet-name>
+    <url-pattern>/backstage/hotgood/search</url-pattern>
+  </servlet-mapping>
+
+<!-- 用户管理 -->  
+ <servlet>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>cx.studio.store.backstage.servlet.UserServlet</servlet-class>
+  </servlet>
+<servlet-mapping>
+	<servlet-name>UserServlet</servlet-name>
+	<url-pattern>/backstage/users/index</url-pattern>
+</servlet-mapping>
+  
+  
+  
+ <!-- 添加图片到服务器的servlet处理 -->
+ <servlet>
+    <servlet-name>AddPictureServlet</servlet-name>
+    <servlet-class>cx.studio.store.backstage.servlet.AddPictureServlet</servlet-class>
+    <init-param>
+    <param-name>savePath</param-name>
+    <param-value>images</param-value>
+    </init-param>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>AddPictureServlet</servlet-name>
+    <url-pattern>/servlet/AddPictureServlet</url-pattern>
+  </servlet-mapping>
+ 
+  
+  
+  <!-- 配置编码过滤器 -->
+  <filter>
+  <filter-name>EncodingFilter</filter-name>
+  <filter-class>cx.studio.store.web.filter.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  <filter-name>EncodingFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+
 </web-app>

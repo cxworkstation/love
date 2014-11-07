@@ -87,7 +87,7 @@ table .floatLeft{float:left; }
    	  <tr>
    	    <td>类型名称:</td>
   		<td>
-  		      <input type="text" name="type_id" size="40">
+  		      <input type="text" name="type_name" size="40">
   		</td>
    	  </tr>
    	  <tr>

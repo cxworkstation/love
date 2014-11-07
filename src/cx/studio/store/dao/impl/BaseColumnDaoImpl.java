@@ -27,7 +27,7 @@ public class BaseColumnDaoImpl implements BaseColumnDao {
 		String productId = CodeUtil.getProductId();
 		Object[] param1 = { goods.getName(), goods.getOldprice(),
 				goods.getNewprice(), goods.getStart_number(), 0,
-				goods.getUnit(), goods.getImg(), productId, goods.getPuttime(),
+				goods.getUnit(), goods.getImg(), productId, new Date(),
 				goods.getType_name() };
 		ColumnName c = new ColumnName();
 		Object[] param2 = { c.getName(column_id), productId, column_id };
@@ -61,7 +61,7 @@ public class BaseColumnDaoImpl implements BaseColumnDao {
 
 	// 通过id寻找当季推荐商品（除了备注和关键字）--跟根据id寻找商品一样
 	public List<List<Object>> findColumnById(int id) {
-		String sql = "select * from goods where id=?";
+		String sql = "select id,img,name,oldprice,newprice,start_number,unit,type_name from goods where id=?";
 		Object[] param = { id };
 		List<List<Object>> current = baseDao.BaseQuery(sql, param);
 		return current;
@@ -69,11 +69,10 @@ public class BaseColumnDaoImpl implements BaseColumnDao {
 
 	// 修改当季推荐商品
 	public int updateColumn(Goods goods) {
-		String sql = "update goods set name=?,oldprice=?,newprice=?,start_number=?,unit=?,img=?,product_id=?,puttime=?,type_name=? where id=?";
+		String sql = "update goods set name=?,oldprice=?,newprice=?,start_number=?,unit=?,img=?,puttime=?,type_name=? where id=?";
 		Object[] param = { goods.getName(), goods.getOldprice(),
 				goods.getNewprice(), goods.getStart_number(), goods.getUnit(),
-				goods.getImg(), goods.getProduct_id(), goods.getPuttime(),
-				goods.getType_name(), goods.getId() };
+				goods.getImg(), new Date(), goods.getType_name(), goods.getId() };
 		int result = baseDao.BaseUpdate(sql, param);
 		return result;
 	}
@@ -88,16 +87,15 @@ public class BaseColumnDaoImpl implements BaseColumnDao {
 	public void demo1() {
 		// 添加当季推荐商品(column_id从前台servlet里面传过来)
 		Goods goods = new Goods();
-		goods.setName("1ggi2p");
+		goods.setName("1sapsw2");
 		goods.setOldprice(52.1);
 		goods.setNewprice(43.0);
-		goods.setProduct_id("aigp21");
+		goods.setProduct_id("1sspwa2");
 		goods.setStart_number(130);
-		goods.setType_name("1gpgg");
+		goods.setType_name("1aw2sp");
 		goods.setUnit("g");
 		goods.setImg("images/4.jpg");
-		goods.setPuttime(new Date());
-		String column_id = "c4";
+		String column_id = "c2";
 		boolean flag = insertColumn(goods, column_id);
 		System.out.println(flag);
 	}
