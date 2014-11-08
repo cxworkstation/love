@@ -48,26 +48,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td width="8%">销售数量</td>
 	<td width="18%">操作</td>
 </tr>
-<c:if test="${! empty pm.list}">
-<c:forEach var="list" items="${pm.list}">
-<tr id="${list[0]}">
+<c:forEach var="list1" items="${list}">
+<tr id="${list1[0]}">
 <td align="center"><input name="id" type="checkbox" id="ID" class="np" value="ID"></td>
-<c:forEach var="attr" items="${list}">
+<c:forEach var="attr" items="${list1}">
 <td align="center">${attr }</td>
 </c:forEach>
 	<td align="center">
-	<a href="javascript:openWin('<%=basePath %>backstage/goods/updateInput?id=${list[0]}');">编辑</a> |
-	<a href="javascript:del('<%=basePath %>backstage/goods/delete?id=${list[0]}');">删除</a> | 
-	<a href="javascript:openWin('<%=basePath %>backstage/goods/remarkInput?id=${list[0]}');">备注</a> 
+	<a href="javascript:openWin('<%=basePath %>backstage/goods/updateInput?id=${list1[0]}');">编辑</a> |
+	<a href="javascript:del('<%=basePath %>backstage/goods/delete?id=${list1[0]}');">删除</a> | 
+	<a href="javascript:openWin('<%=basePath %>backstage/goods/remarkInput?id=${list1[0]}');">备注</a> 
 	</td>
 	</tr>
    </c:forEach>
-</c:if>
-<c:if test="${empty pm.list}">
-  <tr>
-    <td colspan="10" align="center">数据库暂时没有数据</td>
-  </tr>
-</c:if>
+
 <tr bgcolor="#FAFAF1">
 <td height="28" colspan="3" align="left">
 	&nbsp;
@@ -88,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <select name='colName' style='width:150'>
             <option value=''>选择类型...</option>
           	<option value='keyword'>商品关键字</option>
-          	<option value='name'>商品名称</option>
+          	<option value='product_id'>商品编号</option>
           </select>
         </td>
         <td width='70'>
@@ -108,37 +102,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </form>
 </td>
 </tr>
-<tr bgcolor="#EEF4EA">
-	<td height="36" colspan="10" align="center">
-	   <pg:pager  url="index"  items="${pm.totalCount}" maxPageItems="${pm.pageSize}" maxIndexPages="7" export="currentPageNumber = pageNumber">
-      <pg:first>
-         <a href="${pageUrl}">首页</a>
-      </pg:first>
-      
-      <pg:prev>
-       <a href="${pageUrl}">上一页</a>
-      </pg:prev>
-     
-      <pg:pages>
-       <c:choose>
-        <c:when test="${currentPageNumber eq pageNumber}">
-         <font color="red"> ${pageNumber }</font>
-        </c:when>
-        <c:otherwise><a href="${pageUrl }">${pageNumber }</a></c:otherwise>
-       </c:choose>   
-      </pg:pages>
-      
-      <pg:next>
-       <a href="${pageUrl }">下一页</a>
-      </pg:next>
-      <pg:last>
-       <a href="${pageUrl }">尾页</a>
-      </pg:last>
-    </pg:pager>
-	</td>
-</tr>
-
-
 </table>
 
 </body>

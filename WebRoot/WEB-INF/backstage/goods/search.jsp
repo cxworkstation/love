@@ -110,7 +110,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </tr>
 <tr bgcolor="#EEF4EA">
 	<td height="36" colspan="10" align="center">
-	   <pg:pager  url="index"  items="${pm.totalCount}" maxPageItems="${pm.pageSize}" maxIndexPages="7" export="currentPageNumber = pageNumber">
+	   <pg:pager  url="search"  items="${pm.totalCount}" maxPageItems="${pm.pageSize}" maxIndexPages="7" export="currentPageNumber = pageNumber">
+	   <pg:param name="colName" value="${colName}"/>
+	   <pg:param name="key" value="${key}"/>
       <pg:first>
          <a href="${pageUrl}">首页</a>
       </pg:first>

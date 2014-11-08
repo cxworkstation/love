@@ -19,4 +19,7 @@ public interface BaseDao {
 	// 查找某个字段的基础类
 	public String BaseQuery(String sql, int id);
 
+	// 得到整张表的记录数
+	public Long getCount(String sql);
+
 }

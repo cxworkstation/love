@@ -17,6 +17,49 @@ import cx.studio.store.utils.JdbcUtil;
 public class BaseDaoImpl implements BaseDao {
 	private QueryRunner queryRunner = new QueryRunner(JdbcUtil.getDataSource());
 
+	// 得到整张表的记录数
+	public Long getCount(String sql) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		long count = 0;
+		try {
+			conn = JdbcUtil.getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				count = rs.getLong(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (ps != null) {
+						ps.close();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						if (conn != null) {
+							conn.close();
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return count;
+	}
+
 	public int BaseUpdate(String sql, Object[] param) {
 		int result = 0;
 		try {

@@ -24,12 +24,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <tr align="center" bgcolor="#FAFAF1" height="22">
 	<td width="5%">选 择</td>
 	<td width="5%">ID</td>
-	<td width="15%">用户名</td>
-	<td width="15%">密码</td>
-	<td width="16%">电话号码</td>
-	<td width="17">Email</td>
-	<td width="21%">地址</td>
-	<td width="8%">操作</td>
+	<td width="12%">被评价产品名称</td>
+	<td width="12%">评价人</td>
+	<td width="12%">评价时间</td>
+	<td width="45">评价内容</td>
+	<td width="9%">操作</td>
 </tr>
 <c:forEach var="list1" items="${list}">
 <tr id="${list1[0]}">
@@ -38,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <td align="center">${attr}</td>
 </c:forEach>
 	<td align="center">
-	<a href="javascript:del('<%=basePath %>backstage/users/delete?id=${list1[0]}');">删除</a>
+	<a href="javascript:del('<%=basePath %>backstage/evaluates/delete?id=${list1[0]}');">删除</a>
 	</td>
 	</tr>
    </c:forEach>
@@ -48,11 +47,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	&nbsp;
 	<a href="javascript:selAll()" class="coolbg">全选</a>
 	<a href="javascript:noSelAll()" class="coolbg">取消</a>
-	<a href="javascript:openWin('<%=basePath %>backstage/users/delete');"  class="coolbg" >&nbsp;删除&nbsp;</a>
+	<a href="javascript:openWin('<%=basePath %>backstage/evaluates/delete');"  class="coolbg" >&nbsp;删除&nbsp;</a>
 </td>
 <td colspan="7" valign="top">
   <!--  搜索表单  -->
-<form name='from1' action='<%=basePath %>backstage/users/search' method='post'>
+<form name='from1' action='<%=basePath %>backstage/evaluates/search' method='post'>
 <table width='98%'  border='0' cellpadding='1' cellspacing='1' bgcolor='#CBD8AC' align="center" style="margin-top:8px">
   <tr bgcolor='#EEF4EA'>
     <td background='<%=basePath %>imgs/backstage/wbg.gif' align='center'>
@@ -62,6 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td width='160'>
           <select name='colName' style='width:150'>
             <option value=''>选择类型...</option>
+          	<option value='name'>产品名称</option>
           	<option value='username'>用户名</option>
           </select>
         </td>

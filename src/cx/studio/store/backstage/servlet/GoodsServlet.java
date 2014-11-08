@@ -1,6 +1,8 @@
 package cx.studio.store.backstage.servlet;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import cx.studio.store.model.Goods;
 import cx.studio.store.service.GoodsService;
 import cx.studio.store.service.impl.GoodsServiceImpl;
+import cx.studio.store.utils.PageModel;
 import cx.studio.store.utils.WebUtil;
 
 public class GoodsServlet extends HttpServlet {
@@ -27,8 +30,16 @@ public class GoodsServlet extends HttpServlet {
 		int index = url.indexOf("goods");
 		String str = url.substring(index + 6);
 		if ("index".equals(str)) {
-			List<List<Object>> goods = getAllGoods();
-			request.setAttribute("list", goods);
+			int offSet = 0;
+			String offSetStr = request.getParameter("pager.offset");// 框架默认参数，表示当前页的第一条记录
+			if (offSetStr != null) {
+				offSet = Integer.parseInt(offSetStr);
+			}
+			PageModel pm = new PageModel();// 默认为pageSize=20页
+			List<List<Object>> goods = getAllGoods(offSet, pm.getPageSize());
+			pm.setList(goods);
+			pm.setTotalCount(getCount());
+			request.setAttribute("pm", pm);
 			request.getRequestDispatcher("/WEB-INF/backstage/goods/index.jsp")
 					.forward(request, response);
 		} else if ("addInput".equals(str)) {
@@ -112,9 +123,22 @@ public class GoodsServlet extends HttpServlet {
 		} else if ("search".equals(str)) {
 			String colName = request.getParameter("colName");
 			String key = request.getParameter("key");
-			List<List<Object>> list = search(colName, key);
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("/WEB-INF/backstage/goods/index.jsp")
+			int offSet = 0;
+			String offSetStr = request.getParameter("pager.offset");
+			if (offSetStr != null) {
+				offSet = Integer.parseInt(offSetStr);
+			}
+			PageModel pm = new PageModel();
+			key = URLDecoder.decode(key, "UTF-8");
+			System.out.println(key);
+			List<List<Object>> list = search(colName, key, offSet, pm
+					.getPageSize());
+			pm.setList(list);
+			pm.setTotalCount(getSearchCount(colName, key));
+			request.setAttribute("pm", pm);
+			request.setAttribute("colName", colName);
+			request.setAttribute("key", URLEncoder.encode(key, "UTF-8"));
+			request.getRequestDispatcher("/WEB-INF/backstage/goods/search.jsp")
 					.forward(request, response);
 
 		}
@@ -128,9 +152,21 @@ public class GoodsServlet extends HttpServlet {
 
 	GoodsService service = new GoodsServiceImpl();
 
+	// 得到整张表的记录数
+	private Long getCount() {
+		return service.getCount();
+	}
+
+	// 查询条件下的记录条数
+	private Long getSearchCount(String colName, String key) {
+		return service.getSearchCount(colName, key);
+	}
+
 	// 条件查询
-	private List<List<Object>> search(String colName, String key) {
-		List<List<Object>> list = service.search(colName, key);
+	private List<List<Object>> search(String colName, String key, int offSet,
+			int pageSize) {
+		List<List<Object>> list = service
+				.search(colName, key, offSet, pageSize);
 		return list;
 	}
 
@@ -156,8 +192,8 @@ public class GoodsServlet extends HttpServlet {
 	}
 
 	// 查看所有
-	private List<List<Object>> getAllGoods() {
-		List<List<Object>> goods = service.findAllGoods();
+	private List<List<Object>> getAllGoods(int offSet, int pageSize) {
+		List<List<Object>> goods = service.findAllGoods(offSet, pageSize);
 		return goods;
 	}
 

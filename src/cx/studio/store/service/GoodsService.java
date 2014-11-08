@@ -6,7 +6,7 @@ import cx.studio.store.model.Goods;
 
 public interface GoodsService {
 	// 找到所有商品
-	public List<List<Object>> findAllGoods();
+	public List<List<Object>> findAllGoods(int offSet, int pageSize);
 
 	// 删除商品
 	public int deleteGoodsById(int id);
@@ -27,8 +27,15 @@ public interface GoodsService {
 	public boolean DelBatch(String[] ids);
 
 	// 条件查询
-	public List<List<Object>> search(String colName, String key);
+	public List<List<Object>> search(String colName, String key, int offSet,
+			int pageSize);
 
 	// 修改商品
 	public int updateGoods(Goods goods);
+
+	// 得到整张表的记录数
+	public Long getCount();
+
+	// 查询条件查询的记录个数
+	public Long getSearchCount(String colName, String key);
 }

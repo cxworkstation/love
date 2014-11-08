@@ -3,6 +3,8 @@ package cx.studio.store.dao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Test;
+
 import cx.studio.store.dao.BaseDao;
 import cx.studio.store.dao.GoodsDao;
 import cx.studio.store.model.Goods;
@@ -35,7 +37,7 @@ public class GoodsDaoImpl implements GoodsDao {
 
 	public void demo5() {
 		// 查看所有的商品
-		List<List<Object>> goods = findAllGoods();
+		List<List<Object>> goods = findAllGoods(1, 20);
 		System.out.println(goods);
 	}
 
@@ -62,9 +64,10 @@ public class GoodsDaoImpl implements GoodsDao {
 
 	// 查看所有的商品
 
-	public List<List<Object>> findAllGoods() {
-		String sql = "select id,product_id,name,oldprice,newprice,unit,start_number,count from goods";
-		List<List<Object>> goods = baseDao.BaseQuery(sql, null);
+	public List<List<Object>> findAllGoods(int offSet, int pageSize) {
+		String sql = "select id,product_id,name,oldprice,newprice,unit,start_number,count from goods limit ?,?";
+		Object[] param = { offSet, pageSize };
+		List<List<Object>> goods = baseDao.BaseQuery(sql, param);
 		return goods;
 	}
 
@@ -177,26 +180,39 @@ public class GoodsDaoImpl implements GoodsDao {
 		return result;
 	}
 
+	@Test
 	public void demo11() {
-		// 条件查询商品
-		List<List<Object>> a = search("keyword", "苹果");
-		System.out.println(a);
+		List<List<Object>> s = search("name", "xx", 0, 15);
+		System.out.println(s);
 	}
 
 	// 条件查询商品
-	public List<List<Object>> search(String colName, String key) {
-		String sql = "";
-		if ("product_id".equals(colName)) {
-			sql = "select id,product_id,name,oldprice,newprice,unit,start_number,count from goods where product_id='"
-					+ key + "'";
-		} else if ("keyword".equals(colName)) {
-			sql = "select id,product_id,name,oldprice,newprice,unit,start_number,count from goods where keyword like '%"
-					+ key + "%'";
-		} else {
-			// 空
-			sql = "select id,product_id,name,oldprice,newprice,unit,start_number,count from goods";
-		}
+	public List<List<Object>> search(String colName, String key, int offSet,
+			int pageSize) {
+		String sql = "select id,product_id,name,oldprice,newprice,unit,start_number,count from goods where "
+				+ colName
+				+ " like '%"
+				+ key
+				+ "%' limit "
+				+ offSet
+				+ ","
+				+ pageSize;
+		// Object[] param = { colName, key, offSet, pageSize };
 		List<List<Object>> list = baseDao.BaseQuery(sql, null);
 		return list;
+	}
+
+	// 得到整张表的记录数
+	public Long getCount() {
+		String sql = "select count(*) from goods";
+		long count = baseDao.getCount(sql);
+		return count;
+	}
+
+	@Override
+	public Long getSearchCount(String colName, String key) {
+		String sql = "select count(*) from goods where " + colName + " like '%"
+				+ key + "%'";
+		return baseDao.getCount(sql);
 	}
 }

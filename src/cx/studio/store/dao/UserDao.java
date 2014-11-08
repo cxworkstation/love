@@ -22,4 +22,7 @@ public interface UserDao {
 
 	// 根据id查找用户
 	public List<List<Object>> findById(int id);
+
+	// 条件查找用户
+	public List<List<Object>> search(String colName, String key);
 }

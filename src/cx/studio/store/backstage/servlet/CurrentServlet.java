@@ -1,6 +1,7 @@
 package cx.studio.store.backstage.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -54,15 +55,14 @@ public class CurrentServlet extends HttpServlet {
 					request, response);
 		} else if ("delete".equals(str)) {
 			boolean flag = delete(id);
-			if (flag) {
-				request.getRequestDispatcher(
-						"/WEB-INF/backstage/common/success.jsp").forward(
-						request, response);
+			String aid = "";
+			if (!flag) {
+				aid = "cao";
 			} else {
-				request.getRequestDispatcher(
-						"/WEB-INF/backstage/common/fail.jsp").forward(request,
-						response);
+				aid = StrId;
 			}
+			PrintWriter out = response.getWriter();
+			out.print(aid);
 		} else if ("update".equals(str)) {
 			Goods goods = WebUtil.request2Bean(request, Goods.class);
 			boolean flag = update(goods);

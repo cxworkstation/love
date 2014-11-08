@@ -52,8 +52,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <dt onClick='showHide("items2_1")'><b>事务管理</b></dt>
         <dd style='display:block' class='sitem' id='items2_1'>
           <ul class='sitemu'>
-			<li><a href="<%=basePath%>backstage/orders/index" target='main'>订单管理</a></li>
-			<li><a href="<%=basePath%>backstage/users/index" target='main'>用户管理</a></li>
+			<li>
+                <a href="<%=basePath%>backstage/orders/index"   target='main'>订单管理</a>
+            </li>
+			 <li>
+                <a href="<%=basePath%>backstage/users/index"   target='main'>用户管理</a>
+            </li>
 			<li><a href="<%=basePath%>backstage/evaluates/index" target='main'>评论管理</a></li>
 			<li><a href="<%=basePath%>backstage/messages/index" target='main'>留言管理</a></li>
           </ul>

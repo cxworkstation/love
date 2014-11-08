@@ -21,7 +21,7 @@ public interface GoodsDao {
 	public List<List<Object>> findById(int id);
 
 	// 查找所有商品
-	public List<List<Object>> findAllGoods();
+	public List<List<Object>> findAllGoods(int offSet, int pageSize);
 
 	// 根据id查找关键字
 	public String findKeyWords(int id);
@@ -33,5 +33,12 @@ public interface GoodsDao {
 	public int insertGoodsRemark(String remark, int id);
 
 	// 条件查询
-	public List<List<Object>> search(String colName, String key);
+	public List<List<Object>> search(String colName, String key, int offSet,
+			int pageSize);
+
+	// 得到整张表的记录数
+	public Long getCount();
+
+	// 查询条件查询下的记录数
+	public Long getSearchCount(String colName, String key);
 }

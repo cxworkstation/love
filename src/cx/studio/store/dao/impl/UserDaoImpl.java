@@ -18,7 +18,7 @@ public class UserDaoImpl implements UserDao {
 
 	// 查找所有用户
 	public List<List<Object>> getAllUsers() {
-		String sql = "select id,username,password,telephone,emails,registtime from users";
+		String sql = "select id,username,password,telephone,emails,address from users";
 		List<List<Object>> users = baseDao.BaseQuery(sql, null);
 		return users;
 	}
@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 
 	// 根据id查找用户信息
 	public List<List<Object>> findById(int id) {
-		String sql = "select * from users where id=?";
+		String sql = "select id,username,password,telephone,emails,address from users where id=?";
 		Object[] param = { id };
 		List<List<Object>> users = baseDao.BaseQuery(sql, param);
 		return users;
@@ -81,10 +81,26 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public int updateUser(Users user) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	public void demo6() {
+		// 条件查找用户
+		List<List<Object>> l = search("username", "faq");
+		System.out.println(l);
+	}
+
+	// 条件查找用户
+	public List<List<Object>> search(String colName, String key) {
+		String sql = "select id,username,password,telephone,emails,address from users";
+		if ("username".equals(colName)) {
+			sql = "select id,username,password,telephone,emails,address from users where username=?";
+
+		}
+		Object[] param = { key };
+		List<List<Object>> list = baseDao.BaseQuery(sql, param);
+		return list;
+	}
 	// 管理员不可修改客户信息，但是客户可以自己修改密码，电话，email
 
 }

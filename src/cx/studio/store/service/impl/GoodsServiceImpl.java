@@ -10,8 +10,8 @@ import cx.studio.store.service.GoodsService;
 public class GoodsServiceImpl implements GoodsService {
 	GoodsDao goodsDao = new GoodsDaoImpl();
 
-	public List<List<Object>> findAllGoods() {
-		List<List<Object>> goods = goodsDao.findAllGoods();
+	public List<List<Object>> findAllGoods(int offSet, int pageSize) {
+		List<List<Object>> goods = goodsDao.findAllGoods(offSet, pageSize);
 		return goods;
 	}
 
@@ -45,14 +45,24 @@ public class GoodsServiceImpl implements GoodsService {
 		return list;
 	}
 
-	public List<List<Object>> search(String colName, String key) {
-		List<List<Object>> list = goodsDao.search(colName, key);
+	public List<List<Object>> search(String colName, String key, int offSet,
+			int pageSize) {
+		List<List<Object>> list = goodsDao.search(colName, key, offSet,
+				pageSize);
 		return list;
 	}
 
 	public int updateGoods(Goods goods) {
 		int result = goodsDao.updateGoods(goods);
 		return result;
+	}
+
+	public Long getCount() {
+		return goodsDao.getCount();
+	}
+
+	public Long getSearchCount(String colName, String key) {
+		return goodsDao.getSearchCount(colName, key);
 	}
 
 }
